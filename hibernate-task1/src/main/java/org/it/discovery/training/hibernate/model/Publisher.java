@@ -53,6 +53,13 @@ public class Publisher extends BaseEntity{
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+	@Override
+	public String toString() {
+		return "Publisher [name=" + name + "]";
+	}
+	
+	
 	
 
 }

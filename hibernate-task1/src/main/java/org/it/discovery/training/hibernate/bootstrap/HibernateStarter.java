@@ -66,6 +66,19 @@ public class HibernateStarter {
 			Stream.generate(Hit::new).limit(5).forEach(book2::addHit);
 			
 			session.persist(book2);
+			
+			session.getTransaction().commit();
+			
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+			
+			Person person3 = new Person();
+			person3.setName("Links");
+			person3.setBoss(person3);
+			
+			session.persist(person3);
+			
+			System.out.println(person3);
 
 			session.getTransaction().commit();
 			

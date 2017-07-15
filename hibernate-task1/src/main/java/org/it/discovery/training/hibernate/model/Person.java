@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,6 +24,9 @@ public class Person extends BaseEntity {
 	 * Books that person has written
 	 */
 	private List<Book> books;
+	
+	
+	private Person boss;
 
 	public String getName() {
 		return name;
@@ -39,4 +44,21 @@ public class Person extends BaseEntity {
 	public void setBooks(List<Book> books) {
 		this.books = books;
 	}
+
+	@OneToOne(fetch = FetchType.EAGER)
+	public Person getBoss() {
+		return boss;
+	}
+
+	public void setBoss(Person boss) {
+		this.boss = boss;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [name=" + name;
+	}
+	
+	
+
 }
