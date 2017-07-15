@@ -2,6 +2,7 @@ package org.it.discovery.training.hibernate.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -42,7 +43,7 @@ public class Book extends BaseEntity {
 		this.name = name;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Person getAuthor() {
 		return author;
 	}
