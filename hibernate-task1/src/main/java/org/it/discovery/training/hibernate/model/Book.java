@@ -24,7 +24,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name = "BOOK")
-@DiscriminatorValue("b")
 @NamedQueries({
 	@NamedQuery(name = Book.QUERY_FIND_ALL, query = "from Book"),
 	@NamedQuery(name = Book.QUERY_FIND_ALL_WITH_NAME, query = "from Book where name=:name"),

@@ -19,7 +19,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name = "PUBLISHER")
-@DiscriminatorValue("pu")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Publisher extends BaseEntity{
 	private String name;

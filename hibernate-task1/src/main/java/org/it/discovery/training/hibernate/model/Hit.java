@@ -9,7 +9,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "HIT")
-@DiscriminatorValue("h")
 public class Hit extends BaseEntity{
 	private String ip;
 	

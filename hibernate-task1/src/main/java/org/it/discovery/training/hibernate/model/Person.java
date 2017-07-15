@@ -15,7 +15,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PERSON")
-@DiscriminatorValue("pe")
 public class Person extends BaseEntity {
 	private String name;
 	
