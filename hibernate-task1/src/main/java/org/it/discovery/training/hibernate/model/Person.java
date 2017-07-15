@@ -2,6 +2,7 @@ package org.it.discovery.training.hibernate.model;
 
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PERSON")
+@DiscriminatorValue("pe")
 public class Person extends BaseEntity {
 	private String name;
 	
