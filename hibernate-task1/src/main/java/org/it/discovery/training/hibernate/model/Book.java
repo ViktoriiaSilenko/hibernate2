@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Formula;
 
 /**
  * Book in a library
@@ -60,6 +61,8 @@ public class Book extends BaseEntity {
 	private int pages;
 	
 	private List<Hit> hits;
+	
+	private int hitCount;
 
 	public String getName() {
 		return name;
@@ -118,12 +121,22 @@ public class Book extends BaseEntity {
 			this.hits = new ArrayList<>();
 		}
 		this.hits.add(hit);
+		hit.setBook(this);
+	}
+	
+	@Formula("(select count(hit.id) from Hit hit where hit.book_id = id)")
+	public int getHitCount() {
+		return hitCount;
+	}
+
+	public void setHitCount(int hitCount) {
+		this.hitCount = hitCount;
 	}
 
 	@Override
 	public String toString() {
 		return "Book [name=" + name + ", author=" + author + ", publisher=" + publisher + ", year=" + year + ", pages="
-				+ pages + "]";
+				+ pages + hitCount + "]";
 	}
 	
 	

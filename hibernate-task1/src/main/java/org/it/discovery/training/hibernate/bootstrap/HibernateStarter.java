@@ -72,6 +72,17 @@ public class HibernateStarter {
 			session = factory.getCurrentSession();
 			session.beginTransaction();
 			
+			List<Book> tmp = session.createQuery("from Book").getResultList();
+			
+			tmp.forEach(e -> System.out.println(e.getHits().size()));
+			
+			System.out.println("hits count = " + tmp.get(0).getHitCount());
+			
+			session.getTransaction().commit();
+			
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+			
 			Person person3 = new Person();
 			person3.setName("Links");
 			person3.setBoss(person3);
@@ -130,8 +141,14 @@ public class HibernateStarter {
 			
 			session.getTransaction().commit();
 			
+			session = factory.getCurrentSession();
+			session.beginTransaction();
 			
-	
+			List<Book> tupleBooks = session.createQuery("select new org.it.discovery.training.hibernate.model.BookInfo(id, name) from Book book").getResultList();
+			System.out.println(tupleBooks);
+		
+			session.getTransaction().commit();
+		
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
