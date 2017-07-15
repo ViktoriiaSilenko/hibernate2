@@ -13,21 +13,21 @@ import org.hibernate.annotations.GenericGenerator;
 @MappedSuperclass
 public abstract class BaseEntity {
 	
-	private String id;
+	private int id;
 	
 	private LocalDateTime created;
 	
 	private LocalDateTime modified;
 
 	@Id
-	@GeneratedValue(generator ="uuid")
-	@GenericGenerator(name="uuid", strategy="uuid2")
-	@Column(name = "ID", length = 40)
-	public String getId() {
+	@GeneratedValue(generator = "offset")
+    @GenericGenerator(name = "offset", strategy = "org.it.discovery.training.hibernate.generator.OffsetGenerator")
+	//@Column(name = "ID", length = 40)
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
