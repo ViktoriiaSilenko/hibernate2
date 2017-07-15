@@ -1,5 +1,6 @@
 package org.it.discovery.training.hibernate.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.BatchSize;
 
 /**
  * Book in a library
@@ -77,12 +80,20 @@ public class Book extends BaseEntity {
 		this.pages = pages;
 	}
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
+	@BatchSize(size = 20)
 	public List<Hit> getHits() {
 		return hits;
 	}
 
 	public void setHits(List<Hit> hits) {
 		this.hits = hits;
+	}
+	
+	public void addHit(Hit hit) {
+		if(hits == null) {
+			this.hits = new ArrayList<>();
+		}
+		this.hits.add(hit);
 	}
 }

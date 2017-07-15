@@ -16,6 +16,9 @@ public class Hit extends BaseEntity{
 	private LocalDateTime viewed;
 	
 	private Book book;
+	
+	public Hit() {
+	}
 
 	public String getIp() {
 		return ip;
