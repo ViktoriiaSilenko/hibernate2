@@ -11,9 +11,13 @@ import org.hibernate.SessionFactory;
 import org.it.discovery.training.hibernate.model.Book;
 import org.it.discovery.training.hibernate.model.Hit;
 import org.it.discovery.training.hibernate.model.Person;
+import org.it.discovery.training.hibernate.repository.BookRepository;
+import org.it.discovery.training.hibernate.repository.named.NamedBookRepository;
 import org.it.discovery.training.hibernate.util.HibernateUtil;
 
 public class HibernateStarter {
+	
+	private static BookRepository repository = new NamedBookRepository();
 
 	public static void main(String[] args) {
 		Session session = null;
@@ -55,6 +59,10 @@ public class HibernateStarter {
 			books.forEach(item -> item.getHits().forEach(hit -> System.out.println("Hit " + hit)));
 			
 			session.getTransaction().commit();
+			
+			System.out.println(repository.findAll());
+			 
+			System.out.println(repository.findWithName("Spring Data"));
 			
 			
 			

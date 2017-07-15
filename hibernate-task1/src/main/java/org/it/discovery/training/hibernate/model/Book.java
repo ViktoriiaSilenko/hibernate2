@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,7 +21,16 @@ import org.hibernate.annotations.BatchSize;
 
 @Entity
 @Table(name = "BOOK")
+@NamedQueries({
+	@NamedQuery(name = Book.QUERY_FIND_ALL, query = "from Book"),
+	@NamedQuery(name = Book.QUERY_FIND_ALL_WITH_NAME, query = "from Book where name=:name")
+})
 public class Book extends BaseEntity {
+	
+	public static final String QUERY_FIND_ALL = "Books.findAll";
+	
+	public static final String QUERY_FIND_ALL_WITH_NAME = "Books.findByName";
+	
 	private String name;
 	
 	private Person author;
@@ -96,4 +107,12 @@ public class Book extends BaseEntity {
 		}
 		this.hits.add(hit);
 	}
+
+	@Override
+	public String toString() {
+		return "Book [name=" + name + ", author=" + author + ", publisher=" + publisher + ", year=" + year + ", pages="
+				+ pages + "]";
+	}
+	
+	
 }
