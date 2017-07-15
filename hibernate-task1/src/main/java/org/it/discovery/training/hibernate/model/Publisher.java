@@ -33,7 +33,7 @@ public class Publisher extends BaseEntity{
 		this.name = name;
 	}
 
-	@OneToMany
+	@OneToMany(mappedBy = "publisher")
 	public List<Book> getBooks() {
 		return books;
 	}
