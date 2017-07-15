@@ -29,7 +29,7 @@ public class Book extends BaseEntity {
 	
 	public static final String QUERY_FIND_ALL = "Books.findAll";
 	
-	public static final String QUERY_FIND_ALL_WITH_NAME = "Books.findByName";
+	public static final String QUERY_FIND_ALL_WITH_NAME = "Books.findAllWithName";
 	
 	private String name;
 	
