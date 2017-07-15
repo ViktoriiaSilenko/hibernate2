@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.it.discovery.training.hibernate.model.Book;
 import org.it.discovery.training.hibernate.model.Hit;
 import org.it.discovery.training.hibernate.model.Person;
+import org.it.discovery.training.hibernate.model.Publisher;
 import org.it.discovery.training.hibernate.repository.BookRepository;
 import org.it.discovery.training.hibernate.repository.named.NamedBookRepository;
 import org.it.discovery.training.hibernate.util.HibernateUtil;
@@ -39,8 +40,24 @@ public class HibernateStarter {
 			
 			session.persist(book);
 			
+			session.getTransaction().commit();
+			
 			System.out.println("bookId = " + book.getId());
 			System.out.println("authorId = " + author.getId());
+			
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+			
+			Book book3 = new Book();
+			book3.setName("Test book3");
+			book3.setYear(2017);
+			session.save(book3);
+			
+			session.getTransaction().commit();
+			
+			
+			session = factory.getCurrentSession();
+			session.beginTransaction();
 			
 			Book book2 = new Book();
 			book2.setName("Spring Data");
@@ -60,11 +77,40 @@ public class HibernateStarter {
 			
 			session.getTransaction().commit();
 			
+			System.out.println("Finding all books");
+			
 			System.out.println(repository.findAll());
 			 
 			System.out.println(repository.findWithName("Spring Data"));
 			
+			System.out.println("find with hits");
+			System.out.println(repository.findWithHits());
 			
+			System.out.println("find without hits");
+			System.out.println(repository.findWithoutHits());
+			
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+			Publisher publisher = new Publisher();
+			publisher.setName("Test");
+			
+			session.persist(publisher);
+			
+			session.getTransaction().commit();
+			
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+			
+			publisher = session.get(Publisher.class, publisher.getId());
+			
+			System.out.println("publisher" + publisher);
+			
+			HibernateUtil.getSessionFactory().getCache().containsEntity(Publisher.class, publisher.getId());
+			
+			session.getTransaction().commit();
+			
+			
+	
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();

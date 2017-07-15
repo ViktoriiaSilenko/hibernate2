@@ -12,7 +12,7 @@ public class NamedBookRepository implements BookRepository {
 	
 	 @Override
      public List<Book> findAll() {
-        return query(session -> session.createNamedQuery(Book.QUERY_FIND_ALL, Book.class).getResultList());
+        return query(session -> session.createNamedQuery(Book.QUERY_FIND_ALL, Book.class).setCacheable(true).getResultList());
      }
 
 	 public List<Book> query(Function<Session, List<Book>> function) {
@@ -45,7 +45,15 @@ public class NamedBookRepository implements BookRepository {
 	@Override
 	public List<Book> findWithHits() {
 
-		return null;
+		return query(session ->
+        session.createNamedQuery(Book.QUERY_FIND_WITH_HITS, Book.class).getResultList());
+	}
+	
+	@Override
+	public List<Book> findWithoutHits() {
+
+		return query(session ->
+        session.createNamedQuery(Book.QUERY_FIND_WITHOUT_HITS, Book.class).getResultList());
 	}
 
 	@Override

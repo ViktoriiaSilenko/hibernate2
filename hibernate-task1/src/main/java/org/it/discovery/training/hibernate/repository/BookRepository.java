@@ -24,6 +24,8 @@ public interface BookRepository {
 	 * @return
 	 */
 	List<Book> findWithHits();
+	
+	List<Book> findWithoutHits();
 
 	/**
 	 * Returns all the books where number of pages is greater than pages parameter

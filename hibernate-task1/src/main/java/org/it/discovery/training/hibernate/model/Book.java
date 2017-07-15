@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * Book in a library
@@ -23,13 +25,22 @@ import org.hibernate.annotations.BatchSize;
 @Table(name = "BOOK")
 @NamedQueries({
 	@NamedQuery(name = Book.QUERY_FIND_ALL, query = "from Book"),
-	@NamedQuery(name = Book.QUERY_FIND_ALL_WITH_NAME, query = "from Book where name=:name")
+	@NamedQuery(name = Book.QUERY_FIND_ALL_WITH_NAME, query = "from Book where name=:name"),
+	@NamedQuery(name = Book.QUERY_FIND_WITH_HITS,
+	                query = "select distinct b from Book b join b.hits"),
+	@NamedQuery(name = Book.QUERY_FIND_WITHOUT_HITS,
+	                query = "select distinct b from Book b left outer join b.hits hits where hits is null")
 })
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Book extends BaseEntity {
 	
 	public static final String QUERY_FIND_ALL = "Books.findAll";
 	
 	public static final String QUERY_FIND_ALL_WITH_NAME = "Books.findAllWithName";
+	
+	public static final String QUERY_FIND_WITH_HITS = "Books.findAllWithHits";
+	
+	public static final String QUERY_FIND_WITHOUT_HITS = "Books.findAllWithoutHits";
 	
 	private String name;
 	
