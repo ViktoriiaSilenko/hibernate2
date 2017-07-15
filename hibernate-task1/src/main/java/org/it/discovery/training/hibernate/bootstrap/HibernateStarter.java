@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.it.discovery.training.hibernate.model.Address;
 import org.it.discovery.training.hibernate.model.Book;
 import org.it.discovery.training.hibernate.model.Hit;
 import org.it.discovery.training.hibernate.model.Person;
@@ -91,8 +92,15 @@ public class HibernateStarter {
 			
 			session = factory.getCurrentSession();
 			session.beginTransaction();
+			
+			Address address = new Address();
+			address.setCity("Kiev");
+			address.setStreet("TTT");
+			address.setApt("111");
+			
 			Publisher publisher = new Publisher();
 			publisher.setName("Test");
+			publisher.setAddress(address);
 			
 			session.persist(publisher);
 			
