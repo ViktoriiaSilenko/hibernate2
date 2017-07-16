@@ -2,8 +2,6 @@ package org.it.discovery.training.hibernate.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 

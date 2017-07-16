@@ -2,10 +2,10 @@ package org.it.discovery.training.hibernate.model;
 
 import java.util.List;
 
-import javax.persistence.DiscriminatorValue;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
