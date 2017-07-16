@@ -31,7 +31,10 @@ import org.hibernate.annotations.Formula;
 	@NamedQuery(name = Book.QUERY_FIND_WITH_HITS,
 	                query = "select distinct b from Book b join b.hits"),
 	@NamedQuery(name = Book.QUERY_FIND_WITHOUT_HITS,
-	                query = "select distinct b from Book b left outer join b.hits hits where hits is null")
+	                query = "select distinct b from Book b left outer join b.hits hits where hits is null"),
+	@NamedQuery(name = Book.QUERY_FIND_ALL_BOOKS_COUNT,
+    query = "select count(*) from Book")
+
 })
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Book extends BaseEntity {
@@ -43,6 +46,8 @@ public class Book extends BaseEntity {
 	public static final String QUERY_FIND_WITH_HITS = "Books.findAllWithHits";
 	
 	public static final String QUERY_FIND_WITHOUT_HITS = "Books.findAllWithoutHits";
+	
+	public static final String QUERY_FIND_ALL_BOOKS_COUNT = "Books.findAllBooksCount";
 	
 	private String name;
 	

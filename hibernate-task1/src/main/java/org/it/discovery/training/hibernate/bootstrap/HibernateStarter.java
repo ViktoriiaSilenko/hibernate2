@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.it.discovery.training.hibernate.model.Address;
 import org.it.discovery.training.hibernate.model.Book;
+import org.it.discovery.training.hibernate.model.BookStatistics;
 import org.it.discovery.training.hibernate.model.Hit;
 import org.it.discovery.training.hibernate.model.Person;
 import org.it.discovery.training.hibernate.model.Publisher;
@@ -146,6 +147,14 @@ public class HibernateStarter {
 			
 			List<Book> tupleBooks = session.createQuery("select new org.it.discovery.training.hibernate.model.BookInfo(id, name) from Book book").getResultList();
 			System.out.println(tupleBooks);
+		
+			session.getTransaction().commit();
+			
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+			
+			BookStatistics tupleBooks2 = session.createQuery("select new org.it.discovery.training.hibernate.model.BookStatistics(count(book.id)) from Book book", BookStatistics.class).getSingleResult();
+			System.out.println("books count = " + tupleBooks2.getBooksCount());
 		
 			session.getTransaction().commit();
 		
