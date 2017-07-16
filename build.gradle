@@ -1,4 +1,44 @@
+<<<<<<< HEAD
   dependencies {
       compile "org.hibernate:hibernate-ehcache:$hibernateVersion"
       compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
  }
+=======
+allprojects  {
+  apply plugin: 'maven'
+  apply plugin: 'eclipse'
+
+  group = 'it.discovery'
+  version = '1.0'
+}
+
+subprojects {
+   ext {
+	   hibernateVersion = '5.2.10.Final'
+           springVersion = '4.3.9.RELEASE'
+   }
+  
+  apply plugin: 'java'
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+
+  repositories {
+    mavenLocal()
+    
+    mavenCentral()
+  }
+
+  
+  dependencies {
+        compile "org.hibernate:hibernate-core:$hibernateVersion"
+        runtime "org.hsqldb:hsqldb:2.4.0"
+        runtime "com.h2database:h2:1.4.196"
+  }
+  
+}
+
+eclipse { 
+	classpath { 
+		downloadSources=true
+}}
+>>>>>>> branch 'master' of https://github.com/ViktoriiaSilenko/hibernate2.git
